@@ -535,7 +535,7 @@ void launch_rootshell(void)
     struct stat s;
 
 
-    fd = open("/proc/sys/hack",O_WRONLY);
+/*    fd = open("/proc/sys/hack",O_WRONLY);
 
     if(fd == -1) {
         fprintf(stderr,"could not open /proc/sys/hack\n");
@@ -560,7 +560,7 @@ void launch_rootshell(void)
 
     else
         printf("could not create rootshell\n");
-
+*/
 
 }
 
