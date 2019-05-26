@@ -29,14 +29,14 @@ void *A(void *ptr){
     for (j = 0;j < nProcessNum;j++)
     {
         if (CPU_ISSET(j,&get))
-            printf("A: thread %d is running in processor%d\n",pthread_self(),j);
+            printf("A: thread %x is running in processor%d\n",pthread_self(),j);
     }
     sleep(2);
     
     for (j = 0;j < nProcessNum;j++)
     {
         if (CPU_ISSET(j,&get))
-            printf("A: thread %d is running in processor%d\n",pthread_self(),j);
+            printf("A: thread %x is running in processor%d\n",pthread_self(),j);
     }
     
     race_data = 100;
@@ -44,7 +44,7 @@ void *A(void *ptr){
     for (j = 0;j < nProcessNum;j++)
     {
         if (CPU_ISSET(j,&get))
-            printf("A: thread %d is running in processor%d\n",pthread_self(),j);
+            printf("A: thread %x is running in processor%d\n",pthread_self(),j);
     }
     
     printf("%s: %d\n", (char*)ptr, race_data);
@@ -66,21 +66,21 @@ void *B(void *ptr){
     for (j = 0;j < nProcessNum;j++)
     {
         if (CPU_ISSET(j,&get))
-            printf("B: thread %d is running in processor%d\n",pthread_self(),j);
+            printf("B: thread %x is running in processor%d\n",pthread_self(),j);
     }
     sleep(1);
     
     for (j = 0;j < nProcessNum;j++)
     {
         if (CPU_ISSET(j,&get))
-            printf("B: thread %d is running in processor%d\n",pthread_self(),j);
+            printf("B: thread %x is running in processor%d\n",pthread_self(),j);
     }
     race_data = 1;
     
     for (j = 0;j < nProcessNum;j++)
     {
         if (CPU_ISSET(j,&get))
-            printf("B: thread %d is running in processor%d\n",pthread_self(),j);
+            printf("B: thread %x is running in processor%d\n",pthread_self(),j);
     }
     
     printf("%s: %d\n", (char*)ptr, race_data);
