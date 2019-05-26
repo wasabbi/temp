@@ -5,9 +5,7 @@
 int race_data = 0;
 
 void *A(void *ptr){
-    sleep(1);
-    printf("A is sleeping\n");
-    sleep(1);
+    sleep(2);
     race_data = 100;
     printf("%s: %d\n", (char*)ptr, race_data);
 }
