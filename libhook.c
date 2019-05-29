@@ -7,8 +7,8 @@
 
 typedef int (*orig_pthread_create_ftype)(pthread_t *, const pthread_attr_t *, void* (void *), void *);
 
-void* thread1 = 0x4009fb;
-void* thread2 = 0x400ab4;
+void* thread1 = 0x40231E;
+void* thread2 = 0xdeadbeaf;
 
 int pthread_create(pthread_t *__restrict __newthread,
 			   const pthread_attr_t *__restrict __attr,

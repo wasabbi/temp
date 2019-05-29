@@ -1,6 +1,7 @@
 from zio import *
 from time import *
-p = zio("./got_main")
+libc_file_path = "./libhook.so"
+p = zio("./got_main",env={"LD_PRELOAD":libc_file_path})
 
 printf_plt = 0x400B60  
 atoi_got = 0x6050C8
