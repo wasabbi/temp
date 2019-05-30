@@ -65,7 +65,7 @@ int main(){
     pthread_join(t1, NULL);
     pthread_join(t2, NULL);
     printf("main: thread %x is running in processor%d\n",pthread_self(),get_current_CPU());
-    
+    printf("final result: %d\n", race_data);
     return 0;
 }
 

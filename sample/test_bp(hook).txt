@@ -86,8 +86,8 @@ Disassembly of section .text:
   4007e9:	48 83 e4 f0          	and    $0xfffffffffffffff0,%rsp
   4007ed:	50                   	push   %rax
   4007ee:	54                   	push   %rsp
-  4007ef:	49 c7 c0 20 0d 40 00 	mov    $0x400d20,%r8
-  4007f6:	48 c7 c1 b0 0c 40 00 	mov    $0x400cb0,%rcx
+  4007ef:	49 c7 c0 30 0d 40 00 	mov    $0x400d30,%r8
+  4007f6:	48 c7 c1 c0 0c 40 00 	mov    $0x400cc0,%rcx
   4007fd:	48 c7 c7 6d 0b 40 00 	mov    $0x400b6d,%rdi
   400804:	e8 67 ff ff ff       	callq  400770 <__libc_start_main@plt>
   400809:	f4                   	hlt    
@@ -190,7 +190,7 @@ Disassembly of section .text:
   400937:	48 89 c1             	mov    %rax,%rcx
   40093a:	ba 1b 00 00 00       	mov    $0x1b,%edx
   40093f:	be 01 00 00 00       	mov    $0x1,%esi
-  400944:	bf 3c 0d 40 00       	mov    $0x400d3c,%edi
+  400944:	bf 4c 0d 40 00       	mov    $0x400d4c,%edi
   400949:	e8 62 fe ff ff       	callq  4007b0 <fwrite@plt>
   40094e:	c7 85 64 ff ff ff 00 	movl   $0x0,-0x9c(%rbp)
   400955:	00 00 00 
@@ -248,7 +248,7 @@ Disassembly of section .text:
   400a14:	e8 77 fd ff ff       	callq  400790 <pthread_self@plt>
   400a19:	89 da                	mov    %ebx,%edx
   400a1b:	48 89 c6             	mov    %rax,%rsi
-  400a1e:	bf 58 0d 40 00       	mov    $0x400d58,%edi
+  400a1e:	bf 68 0d 40 00       	mov    $0x400d68,%edi
   400a23:	b8 00 00 00 00       	mov    $0x0,%eax
   400a28:	e8 33 fd ff ff       	callq  400760 <printf@plt>
   400a2d:	bf 02 00 00 00       	mov    $0x2,%edi
@@ -260,7 +260,7 @@ Disassembly of section .text:
   400a48:	e8 43 fd ff ff       	callq  400790 <pthread_self@plt>
   400a4d:	89 da                	mov    %ebx,%edx
   400a4f:	48 89 c6             	mov    %rax,%rsi
-  400a52:	bf 58 0d 40 00       	mov    $0x400d58,%edi
+  400a52:	bf 68 0d 40 00       	mov    $0x400d68,%edi
   400a57:	b8 00 00 00 00       	mov    $0x0,%eax
   400a5c:	e8 ff fc ff ff       	callq  400760 <printf@plt>
   400a61:	c7 05 21 16 20 00 64 	movl   $0x64,0x201621(%rip)        # 60208c <race_data>
@@ -271,13 +271,13 @@ Disassembly of section .text:
   400a77:	e8 14 fd ff ff       	callq  400790 <pthread_self@plt>
   400a7c:	89 da                	mov    %ebx,%edx
   400a7e:	48 89 c6             	mov    %rax,%rsi
-  400a81:	bf 58 0d 40 00       	mov    $0x400d58,%edi
+  400a81:	bf 68 0d 40 00       	mov    $0x400d68,%edi
   400a86:	b8 00 00 00 00       	mov    $0x0,%eax
   400a8b:	e8 d0 fc ff ff       	callq  400760 <printf@plt>
   400a90:	8b 15 f6 15 20 00    	mov    0x2015f6(%rip),%edx        # 60208c <race_data>
   400a96:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
   400a9a:	48 89 c6             	mov    %rax,%rsi
-  400a9d:	bf 80 0d 40 00       	mov    $0x400d80,%edi
+  400a9d:	bf 90 0d 40 00       	mov    $0x400d90,%edi
   400aa2:	b8 00 00 00 00       	mov    $0x0,%eax
   400aa7:	e8 b4 fc ff ff       	callq  400760 <printf@plt>
   400aac:	90                   	nop
@@ -298,7 +298,7 @@ Disassembly of section .text:
   400acd:	e8 be fc ff ff       	callq  400790 <pthread_self@plt>
   400ad2:	89 da                	mov    %ebx,%edx
   400ad4:	48 89 c6             	mov    %rax,%rsi
-  400ad7:	bf 88 0d 40 00       	mov    $0x400d88,%edi
+  400ad7:	bf 98 0d 40 00       	mov    $0x400d98,%edi
   400adc:	b8 00 00 00 00       	mov    $0x0,%eax
   400ae1:	e8 7a fc ff ff       	callq  400760 <printf@plt>
   400ae6:	bf 01 00 00 00       	mov    $0x1,%edi
@@ -310,7 +310,7 @@ Disassembly of section .text:
   400b01:	e8 8a fc ff ff       	callq  400790 <pthread_self@plt>
   400b06:	89 da                	mov    %ebx,%edx
   400b08:	48 89 c6             	mov    %rax,%rsi
-  400b0b:	bf 88 0d 40 00       	mov    $0x400d88,%edi
+  400b0b:	bf 98 0d 40 00       	mov    $0x400d98,%edi
   400b10:	b8 00 00 00 00       	mov    $0x0,%eax
   400b15:	e8 46 fc ff ff       	callq  400760 <printf@plt>
   400b1a:	c7 05 68 15 20 00 01 	movl   $0x1,0x201568(%rip)        # 60208c <race_data>
@@ -321,13 +321,13 @@ Disassembly of section .text:
   400b30:	e8 5b fc ff ff       	callq  400790 <pthread_self@plt>
   400b35:	89 da                	mov    %ebx,%edx
   400b37:	48 89 c6             	mov    %rax,%rsi
-  400b3a:	bf 88 0d 40 00       	mov    $0x400d88,%edi
+  400b3a:	bf 98 0d 40 00       	mov    $0x400d98,%edi
   400b3f:	b8 00 00 00 00       	mov    $0x0,%eax
   400b44:	e8 17 fc ff ff       	callq  400760 <printf@plt>
   400b49:	8b 15 3d 15 20 00    	mov    0x20153d(%rip),%edx        # 60208c <race_data>
   400b4f:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
   400b53:	48 89 c6             	mov    %rax,%rsi
-  400b56:	bf 80 0d 40 00       	mov    $0x400d80,%edi
+  400b56:	bf 90 0d 40 00       	mov    $0x400d90,%edi
   400b5b:	b8 00 00 00 00       	mov    $0x0,%eax
   400b60:	e8 fb fb ff ff       	callq  400760 <printf@plt>
   400b65:	90                   	nop
@@ -345,9 +345,9 @@ Disassembly of section .text:
   400b7d:	00 00 
   400b7f:	48 89 45 e8          	mov    %rax,-0x18(%rbp)
   400b83:	31 c0                	xor    %eax,%eax
-  400b85:	48 c7 45 d8 b0 0d 40 	movq   $0x400db0,-0x28(%rbp)
+  400b85:	48 c7 45 d8 c0 0d 40 	movq   $0x400dc0,-0x28(%rbp)
   400b8c:	00 
-  400b8d:	48 c7 45 e0 b8 0d 40 	movq   $0x400db8,-0x20(%rbp)
+  400b8d:	48 c7 45 e0 c8 0d 40 	movq   $0x400dc8,-0x20(%rbp)
   400b94:	00 
   400b95:	48 8b 55 d8          	mov    -0x28(%rbp),%rdx
   400b99:	48 8d 45 c8          	lea    -0x38(%rbp),%rax
@@ -363,7 +363,7 @@ Disassembly of section .text:
   400bc1:	e8 ca fb ff ff       	callq  400790 <pthread_self@plt>
   400bc6:	89 da                	mov    %ebx,%edx
   400bc8:	48 89 c6             	mov    %rax,%rsi
-  400bcb:	bf c0 0d 40 00       	mov    $0x400dc0,%edi
+  400bcb:	bf d0 0d 40 00       	mov    $0x400dd0,%edi
   400bd0:	b8 00 00 00 00       	mov    $0x0,%eax
   400bd5:	e8 86 fb ff ff       	callq  400760 <printf@plt>
   400bda:	48 8b 55 e0          	mov    -0x20(%rbp),%rdx
@@ -380,16 +380,16 @@ Disassembly of section .text:
   400c06:	e8 85 fb ff ff       	callq  400790 <pthread_self@plt>
   400c0b:	89 da                	mov    %ebx,%edx
   400c0d:	48 89 c6             	mov    %rax,%rsi
-  400c10:	bf c0 0d 40 00       	mov    $0x400dc0,%edi
+  400c10:	bf d0 0d 40 00       	mov    $0x400dd0,%edi
   400c15:	b8 00 00 00 00       	mov    $0x0,%eax
   400c1a:	e8 41 fb ff ff       	callq  400760 <printf@plt>
   400c1f:	83 7d c0 00          	cmpl   $0x0,-0x40(%rbp)
   400c23:	75 0a                	jne    400c2f <main+0xc2>
-  400c25:	bf eb 0d 40 00       	mov    $0x400deb,%edi
+  400c25:	bf fb 0d 40 00       	mov    $0x400dfb,%edi
   400c2a:	e8 11 fb ff ff       	callq  400740 <puts@plt>
   400c2f:	83 7d c4 00          	cmpl   $0x0,-0x3c(%rbp)
   400c33:	75 0a                	jne    400c3f <main+0xd2>
-  400c35:	bf fa 0d 40 00       	mov    $0x400dfa,%edi
+  400c35:	bf 0a 0e 40 00       	mov    $0x400e0a,%edi
   400c3a:	e8 01 fb ff ff       	callq  400740 <puts@plt>
   400c3f:	48 8b 45 c8          	mov    -0x38(%rbp),%rax
   400c43:	be 00 00 00 00       	mov    $0x0,%esi
@@ -405,68 +405,72 @@ Disassembly of section .text:
   400c6d:	e8 1e fb ff ff       	callq  400790 <pthread_self@plt>
   400c72:	89 da                	mov    %ebx,%edx
   400c74:	48 89 c6             	mov    %rax,%rsi
-  400c77:	bf c0 0d 40 00       	mov    $0x400dc0,%edi
+  400c77:	bf d0 0d 40 00       	mov    $0x400dd0,%edi
   400c7c:	b8 00 00 00 00       	mov    $0x0,%eax
   400c81:	e8 da fa ff ff       	callq  400760 <printf@plt>
-  400c86:	b8 00 00 00 00       	mov    $0x0,%eax
-  400c8b:	48 8b 4d e8          	mov    -0x18(%rbp),%rcx
-  400c8f:	64 48 33 0c 25 28 00 	xor    %fs:0x28,%rcx
-  400c96:	00 00 
-  400c98:	74 05                	je     400c9f <main+0x132>
-  400c9a:	e8 b1 fa ff ff       	callq  400750 <__stack_chk_fail@plt>
-  400c9f:	48 83 c4 38          	add    $0x38,%rsp
-  400ca3:	5b                   	pop    %rbx
-  400ca4:	5d                   	pop    %rbp
-  400ca5:	c3                   	retq   
-  400ca6:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
-  400cad:	00 00 00 
+  400c86:	8b 05 00 14 20 00    	mov    0x201400(%rip),%eax        # 60208c <race_data>
+  400c8c:	89 c6                	mov    %eax,%esi
+  400c8e:	bf 19 0e 40 00       	mov    $0x400e19,%edi
+  400c93:	b8 00 00 00 00       	mov    $0x0,%eax
+  400c98:	e8 c3 fa ff ff       	callq  400760 <printf@plt>
+  400c9d:	b8 00 00 00 00       	mov    $0x0,%eax
+  400ca2:	48 8b 4d e8          	mov    -0x18(%rbp),%rcx
+  400ca6:	64 48 33 0c 25 28 00 	xor    %fs:0x28,%rcx
+  400cad:	00 00 
+  400caf:	74 05                	je     400cb6 <main+0x149>
+  400cb1:	e8 9a fa ff ff       	callq  400750 <__stack_chk_fail@plt>
+  400cb6:	48 83 c4 38          	add    $0x38,%rsp
+  400cba:	5b                   	pop    %rbx
+  400cbb:	5d                   	pop    %rbp
+  400cbc:	c3                   	retq   
+  400cbd:	0f 1f 00             	nopl   (%rax)
 
-0000000000400cb0 <__libc_csu_init>:
-  400cb0:	41 57                	push   %r15
-  400cb2:	41 56                	push   %r14
-  400cb4:	41 89 ff             	mov    %edi,%r15d
-  400cb7:	41 55                	push   %r13
-  400cb9:	41 54                	push   %r12
-  400cbb:	4c 8d 25 3e 11 20 00 	lea    0x20113e(%rip),%r12        # 601e00 <__frame_dummy_init_array_entry>
-  400cc2:	55                   	push   %rbp
-  400cc3:	48 8d 2d 3e 11 20 00 	lea    0x20113e(%rip),%rbp        # 601e08 <__init_array_end>
-  400cca:	53                   	push   %rbx
-  400ccb:	49 89 f6             	mov    %rsi,%r14
-  400cce:	49 89 d5             	mov    %rdx,%r13
-  400cd1:	4c 29 e5             	sub    %r12,%rbp
-  400cd4:	48 83 ec 08          	sub    $0x8,%rsp
-  400cd8:	48 c1 fd 03          	sar    $0x3,%rbp
-  400cdc:	e8 1f fa ff ff       	callq  400700 <_init>
-  400ce1:	48 85 ed             	test   %rbp,%rbp
-  400ce4:	74 20                	je     400d06 <__libc_csu_init+0x56>
-  400ce6:	31 db                	xor    %ebx,%ebx
-  400ce8:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
-  400cef:	00 
-  400cf0:	4c 89 ea             	mov    %r13,%rdx
-  400cf3:	4c 89 f6             	mov    %r14,%rsi
-  400cf6:	44 89 ff             	mov    %r15d,%edi
-  400cf9:	41 ff 14 dc          	callq  *(%r12,%rbx,8)
-  400cfd:	48 83 c3 01          	add    $0x1,%rbx
-  400d01:	48 39 eb             	cmp    %rbp,%rbx
-  400d04:	75 ea                	jne    400cf0 <__libc_csu_init+0x40>
-  400d06:	48 83 c4 08          	add    $0x8,%rsp
-  400d0a:	5b                   	pop    %rbx
-  400d0b:	5d                   	pop    %rbp
-  400d0c:	41 5c                	pop    %r12
-  400d0e:	41 5d                	pop    %r13
-  400d10:	41 5e                	pop    %r14
-  400d12:	41 5f                	pop    %r15
-  400d14:	c3                   	retq   
-  400d15:	90                   	nop
-  400d16:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
-  400d1d:	00 00 00 
+0000000000400cc0 <__libc_csu_init>:
+  400cc0:	41 57                	push   %r15
+  400cc2:	41 56                	push   %r14
+  400cc4:	41 89 ff             	mov    %edi,%r15d
+  400cc7:	41 55                	push   %r13
+  400cc9:	41 54                	push   %r12
+  400ccb:	4c 8d 25 2e 11 20 00 	lea    0x20112e(%rip),%r12        # 601e00 <__frame_dummy_init_array_entry>
+  400cd2:	55                   	push   %rbp
+  400cd3:	48 8d 2d 2e 11 20 00 	lea    0x20112e(%rip),%rbp        # 601e08 <__init_array_end>
+  400cda:	53                   	push   %rbx
+  400cdb:	49 89 f6             	mov    %rsi,%r14
+  400cde:	49 89 d5             	mov    %rdx,%r13
+  400ce1:	4c 29 e5             	sub    %r12,%rbp
+  400ce4:	48 83 ec 08          	sub    $0x8,%rsp
+  400ce8:	48 c1 fd 03          	sar    $0x3,%rbp
+  400cec:	e8 0f fa ff ff       	callq  400700 <_init>
+  400cf1:	48 85 ed             	test   %rbp,%rbp
+  400cf4:	74 20                	je     400d16 <__libc_csu_init+0x56>
+  400cf6:	31 db                	xor    %ebx,%ebx
+  400cf8:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
+  400cff:	00 
+  400d00:	4c 89 ea             	mov    %r13,%rdx
+  400d03:	4c 89 f6             	mov    %r14,%rsi
+  400d06:	44 89 ff             	mov    %r15d,%edi
+  400d09:	41 ff 14 dc          	callq  *(%r12,%rbx,8)
+  400d0d:	48 83 c3 01          	add    $0x1,%rbx
+  400d11:	48 39 eb             	cmp    %rbp,%rbx
+  400d14:	75 ea                	jne    400d00 <__libc_csu_init+0x40>
+  400d16:	48 83 c4 08          	add    $0x8,%rsp
+  400d1a:	5b                   	pop    %rbx
+  400d1b:	5d                   	pop    %rbp
+  400d1c:	41 5c                	pop    %r12
+  400d1e:	41 5d                	pop    %r13
+  400d20:	41 5e                	pop    %r14
+  400d22:	41 5f                	pop    %r15
+  400d24:	c3                   	retq   
+  400d25:	90                   	nop
+  400d26:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+  400d2d:	00 00 00 
 
-0000000000400d20 <__libc_csu_fini>:
-  400d20:	f3 c3                	repz retq 
+0000000000400d30 <__libc_csu_fini>:
+  400d30:	f3 c3                	repz retq 
 
 Disassembly of section .fini:
 
-0000000000400d24 <_fini>:
-  400d24:	48 83 ec 08          	sub    $0x8,%rsp
-  400d28:	48 83 c4 08          	add    $0x8,%rsp
-  400d2c:	c3                   	retq   
+0000000000400d34 <_fini>:
+  400d34:	48 83 ec 08          	sub    $0x8,%rsp
+  400d38:	48 83 c4 08          	add    $0x8,%rsp
+  400d3c:	c3                   	retq   
