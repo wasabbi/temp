@@ -5,11 +5,17 @@ go_first
 addr: 400a61
 inst: c705211620
 next_addr: 400a6b
+input:
+400a61 1 400a6b
+c705211620
 
 go_second
 addr: 400b1a
 inst: c705681520
 next_addr: 400b24
+input:
+400b1a 2 400b24
+c705681520
 
 ========================
 For libhook.c
