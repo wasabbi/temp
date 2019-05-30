@@ -1,8 +1,6 @@
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <stdint.h>
-#include <dlfcn.h>
-#include <pthread.h>
 
 void padding(){
     int i;
@@ -69945,13 +69943,7 @@ void manage_bp_hypercall(uint64_t hw_bp_addr, uint8_t *inst, uint64_t inst_lengt
     }
 }
 
-void main(){
-    cpu_set_t mask1;
-    CPU_ZERO(&mask1);
-    CPU_SET(0, &mask1);
-    if (pthread_setaffinity_np(pthread_self(),sizeof(mask1),&mask1) < 0)                  //bind the thread to CPU0 (it'll speed up managing_hw_bp)
-        fprintf(stderr,"set thread affinity failed\n");
-    
+void main(){    
     int command;
     uint64_t hw_bp_addr;
     char inst_str[30];
