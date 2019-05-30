@@ -63,7 +63,7 @@ Disassembly of section .text:
   40053e:	54                   	push   %rsp
   40053f:	49 c7 c0 f0 4d 44 00 	mov    $0x444df0,%r8
   400546:	48 c7 c1 80 4d 44 00 	mov    $0x444d80,%rcx
-  40054d:	48 c7 c7 42 4c 44 00 	mov    $0x444c42,%rdi
+  40054d:	48 c7 c7 32 4c 44 00 	mov    $0x444c32,%rdi
   400554:	e8 a7 ff ff ff       	callq  400500 <__libc_start_main@plt>
   400559:	f4                   	hlt    
   40055a:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
@@ -70119,7 +70119,7 @@ Disassembly of section .text:
   444b22:	c9                   	leaveq 
   444b23:	c3                   	retq   
 
-0000000000444b24 <insert_bp_hypercall>:
+0000000000444b24 <manage_bp_hypercall>:
   444b24:	55                   	push   %rbp
   444b25:	48 89 e5             	mov    %rsp,%rbp
   444b28:	48 83 ec 40          	sub    $0x40,%rsp
@@ -70131,154 +70131,148 @@ Disassembly of section .text:
   444b40:	48 b8 64 64 64 64 64 	movabs $0x6464646464,%rax
   444b47:	00 00 00 
   444b4a:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
-  444b4e:	bf 28 4e 44 00       	mov    $0x444e28,%edi
-  444b53:	e8 78 b9 fb ff       	callq  4004d0 <puts@plt>
-  444b58:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
-  444b5c:	48 89 c6             	mov    %rax,%rsi
-  444b5f:	bf 4d 4e 44 00       	mov    $0x444e4d,%edi
-  444b64:	b8 00 00 00 00       	mov    $0x0,%eax
-  444b69:	e8 82 b9 fb ff       	callq  4004f0 <printf@plt>
-  444b6e:	48 8b 45 d0          	mov    -0x30(%rbp),%rax
-  444b72:	48 89 c6             	mov    %rax,%rsi
-  444b75:	bf 61 4e 44 00       	mov    $0x444e61,%edi
-  444b7a:	b8 00 00 00 00       	mov    $0x0,%eax
-  444b7f:	e8 6c b9 fb ff       	callq  4004f0 <printf@plt>
-  444b84:	48 8b 45 c8          	mov    -0x38(%rbp),%rax
-  444b88:	48 89 c6             	mov    %rax,%rsi
-  444b8b:	bf 6c 4e 44 00       	mov    $0x444e6c,%edi
-  444b90:	b8 00 00 00 00       	mov    $0x0,%eax
-  444b95:	e8 56 b9 fb ff       	callq  4004f0 <printf@plt>
-  444b9a:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
-  444b9e:	48 89 c6             	mov    %rax,%rsi
-  444ba1:	bf 7d 4e 44 00       	mov    $0x444e7d,%edi
-  444ba6:	b8 00 00 00 00       	mov    $0x0,%eax
-  444bab:	e8 40 b9 fb ff       	callq  4004f0 <printf@plt>
-  444bb0:	c7 45 f4 00 00 00 00 	movl   $0x0,-0xc(%rbp)
-  444bb7:	eb 28                	jmp    444be1 <insert_bp_hypercall+0xbd>
-  444bb9:	8b 45 f4             	mov    -0xc(%rbp),%eax
-  444bbc:	48 63 d0             	movslq %eax,%rdx
-  444bbf:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
-  444bc3:	48 01 d0             	add    %rdx,%rax
-  444bc6:	0f b6 00             	movzbl (%rax),%eax
-  444bc9:	0f b6 c0             	movzbl %al,%eax
-  444bcc:	89 c6                	mov    %eax,%esi
-  444bce:	bf 84 4e 44 00       	mov    $0x444e84,%edi
-  444bd3:	b8 00 00 00 00       	mov    $0x0,%eax
-  444bd8:	e8 13 b9 fb ff       	callq  4004f0 <printf@plt>
-  444bdd:	83 45 f4 01          	addl   $0x1,-0xc(%rbp)
-  444be1:	8b 45 f4             	mov    -0xc(%rbp),%eax
-  444be4:	48 98                	cltq   
-  444be6:	48 3b 45 d8          	cmp    -0x28(%rbp),%rax
-  444bea:	72 cd                	jb     444bb9 <insert_bp_hypercall+0x95>
-  444bec:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
-  444bf0:	48 89 c6             	mov    %rax,%rsi
-  444bf3:	bf 88 4e 44 00       	mov    $0x444e88,%edi
-  444bf8:	b8 00 00 00 00       	mov    $0x0,%eax
-  444bfd:	e8 ee b8 fb ff       	callq  4004f0 <printf@plt>
-  444c02:	90                   	nop
-  444c03:	c9                   	leaveq 
-  444c04:	c3                   	retq   
+  444b4e:	48 83 7d e0 00       	cmpq   $0x0,-0x20(%rbp)
+  444b53:	0f 84 b6 00 00 00    	je     444c0f <manage_bp_hypercall+0xeb>
+  444b59:	bf 28 4e 44 00       	mov    $0x444e28,%edi
+  444b5e:	e8 6d b9 fb ff       	callq  4004d0 <puts@plt>
+  444b63:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+  444b67:	48 89 c6             	mov    %rax,%rsi
+  444b6a:	bf 4d 4e 44 00       	mov    $0x444e4d,%edi
+  444b6f:	b8 00 00 00 00       	mov    $0x0,%eax
+  444b74:	e8 77 b9 fb ff       	callq  4004f0 <printf@plt>
+  444b79:	48 8b 45 d0          	mov    -0x30(%rbp),%rax
+  444b7d:	48 89 c6             	mov    %rax,%rsi
+  444b80:	bf 61 4e 44 00       	mov    $0x444e61,%edi
+  444b85:	b8 00 00 00 00       	mov    $0x0,%eax
+  444b8a:	e8 61 b9 fb ff       	callq  4004f0 <printf@plt>
+  444b8f:	48 8b 45 c8          	mov    -0x38(%rbp),%rax
+  444b93:	48 89 c6             	mov    %rax,%rsi
+  444b96:	bf 6c 4e 44 00       	mov    $0x444e6c,%edi
+  444b9b:	b8 00 00 00 00       	mov    $0x0,%eax
+  444ba0:	e8 4b b9 fb ff       	callq  4004f0 <printf@plt>
+  444ba5:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+  444ba9:	48 89 c6             	mov    %rax,%rsi
+  444bac:	bf 7d 4e 44 00       	mov    $0x444e7d,%edi
+  444bb1:	b8 00 00 00 00       	mov    $0x0,%eax
+  444bb6:	e8 35 b9 fb ff       	callq  4004f0 <printf@plt>
+  444bbb:	c7 45 f4 00 00 00 00 	movl   $0x0,-0xc(%rbp)
+  444bc2:	eb 28                	jmp    444bec <manage_bp_hypercall+0xc8>
+  444bc4:	8b 45 f4             	mov    -0xc(%rbp),%eax
+  444bc7:	48 63 d0             	movslq %eax,%rdx
+  444bca:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
+  444bce:	48 01 d0             	add    %rdx,%rax
+  444bd1:	0f b6 00             	movzbl (%rax),%eax
+  444bd4:	0f b6 c0             	movzbl %al,%eax
+  444bd7:	89 c6                	mov    %eax,%esi
+  444bd9:	bf 84 4e 44 00       	mov    $0x444e84,%edi
+  444bde:	b8 00 00 00 00       	mov    $0x0,%eax
+  444be3:	e8 08 b9 fb ff       	callq  4004f0 <printf@plt>
+  444be8:	83 45 f4 01          	addl   $0x1,-0xc(%rbp)
+  444bec:	8b 45 f4             	mov    -0xc(%rbp),%eax
+  444bef:	48 98                	cltq   
+  444bf1:	48 3b 45 d8          	cmp    -0x28(%rbp),%rax
+  444bf5:	72 cd                	jb     444bc4 <manage_bp_hypercall+0xa0>
+  444bf7:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+  444bfb:	48 89 c6             	mov    %rax,%rsi
+  444bfe:	bf 88 4e 44 00       	mov    $0x444e88,%edi
+  444c03:	b8 00 00 00 00       	mov    $0x0,%eax
+  444c08:	e8 e3 b8 fb ff       	callq  4004f0 <printf@plt>
+  444c0d:	eb 20                	jmp    444c2f <manage_bp_hypercall+0x10b>
+  444c0f:	bf a0 4e 44 00       	mov    $0x444ea0,%edi
+  444c14:	e8 b7 b8 fb ff       	callq  4004d0 <puts@plt>
+  444c19:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+  444c1d:	48 89 c6             	mov    %rax,%rsi
+  444c20:	bf 4d 4e 44 00       	mov    $0x444e4d,%edi
+  444c25:	b8 00 00 00 00       	mov    $0x0,%eax
+  444c2a:	e8 c1 b8 fb ff       	callq  4004f0 <printf@plt>
+  444c2f:	90                   	nop
+  444c30:	c9                   	leaveq 
+  444c31:	c3                   	retq   
 
-0000000000444c05 <remove_bp_hypercall>:
-  444c05:	55                   	push   %rbp
-  444c06:	48 89 e5             	mov    %rsp,%rbp
-  444c09:	48 83 ec 20          	sub    $0x20,%rsp
-  444c0d:	48 89 7d e8          	mov    %rdi,-0x18(%rbp)
-  444c11:	48 b8 64 64 64 64 64 	movabs $0x6464646464,%rax
-  444c18:	00 00 00 
-  444c1b:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
-  444c1f:	bf a0 4e 44 00       	mov    $0x444ea0,%edi
-  444c24:	e8 a7 b8 fb ff       	callq  4004d0 <puts@plt>
-  444c29:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
-  444c2d:	48 89 c6             	mov    %rax,%rsi
-  444c30:	bf 4d 4e 44 00       	mov    $0x444e4d,%edi
-  444c35:	b8 00 00 00 00       	mov    $0x0,%eax
-  444c3a:	e8 b1 b8 fb ff       	callq  4004f0 <printf@plt>
-  444c3f:	90                   	nop
-  444c40:	c9                   	leaveq 
-  444c41:	c3                   	retq   
-
-0000000000444c42 <main>:
-  444c42:	55                   	push   %rbp
-  444c43:	48 89 e5             	mov    %rsp,%rbp
-  444c46:	48 83 ec 70          	sub    $0x70,%rsp
-  444c4a:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
-  444c51:	00 00 
-  444c53:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
-  444c57:	31 c0                	xor    %eax,%eax
-  444c59:	bf c8 4e 44 00       	mov    $0x444ec8,%edi
-  444c5e:	b8 00 00 00 00       	mov    $0x0,%eax
-  444c63:	e8 88 b8 fb ff       	callq  4004f0 <printf@plt>
-  444c68:	48 8d 45 9c          	lea    -0x64(%rbp),%rax
-  444c6c:	48 89 c6             	mov    %rax,%rsi
-  444c6f:	bf e8 4e 44 00       	mov    $0x444ee8,%edi
-  444c74:	b8 00 00 00 00       	mov    $0x0,%eax
-  444c79:	e8 92 b8 fb ff       	callq  400510 <scanf@plt>
-  444c7e:	8b 45 9c             	mov    -0x64(%rbp),%eax
-  444c81:	83 f8 01             	cmp    $0x1,%eax
-  444c84:	0f 85 8c 00 00 00    	jne    444d16 <main+0xd4>
-  444c8a:	bf f0 4e 44 00       	mov    $0x444ef0,%edi
-  444c8f:	b8 00 00 00 00       	mov    $0x0,%eax
-  444c94:	e8 57 b8 fb ff       	callq  4004f0 <printf@plt>
-  444c99:	48 8d 4d b0          	lea    -0x50(%rbp),%rcx
-  444c9d:	48 8d 55 a8          	lea    -0x58(%rbp),%rdx
-  444ca1:	48 8d 45 a0          	lea    -0x60(%rbp),%rax
-  444ca5:	48 89 c6             	mov    %rax,%rsi
-  444ca8:	bf 15 4f 44 00       	mov    $0x444f15,%edi
-  444cad:	b8 00 00 00 00       	mov    $0x0,%eax
-  444cb2:	e8 59 b8 fb ff       	callq  400510 <scanf@plt>
-  444cb7:	bf 28 4f 44 00       	mov    $0x444f28,%edi
-  444cbc:	b8 00 00 00 00       	mov    $0x0,%eax
-  444cc1:	e8 2a b8 fb ff       	callq  4004f0 <printf@plt>
-  444cc6:	48 8d 45 d0          	lea    -0x30(%rbp),%rax
-  444cca:	48 89 c6             	mov    %rax,%rsi
-  444ccd:	bf 47 4f 44 00       	mov    $0x444f47,%edi
-  444cd2:	b8 00 00 00 00       	mov    $0x0,%eax
-  444cd7:	e8 34 b8 fb ff       	callq  400510 <scanf@plt>
-  444cdc:	48 8d 55 c0          	lea    -0x40(%rbp),%rdx
-  444ce0:	48 8d 45 d0          	lea    -0x30(%rbp),%rax
-  444ce4:	48 89 d6             	mov    %rdx,%rsi
-  444ce7:	48 89 c7             	mov    %rax,%rdi
-  444cea:	e8 96 fd ff ff       	callq  444a85 <str2inst>
-  444cef:	48 98                	cltq   
-  444cf1:	48 89 45 b8          	mov    %rax,-0x48(%rbp)
-  444cf5:	48 8b 7d b0          	mov    -0x50(%rbp),%rdi
-  444cf9:	48 8b 4d a8          	mov    -0x58(%rbp),%rcx
-  444cfd:	48 8b 45 a0          	mov    -0x60(%rbp),%rax
-  444d01:	48 8b 55 b8          	mov    -0x48(%rbp),%rdx
-  444d05:	48 8d 75 c0          	lea    -0x40(%rbp),%rsi
-  444d09:	49 89 f8             	mov    %rdi,%r8
-  444d0c:	48 89 c7             	mov    %rax,%rdi
-  444d0f:	e8 10 fe ff ff       	callq  444b24 <insert_bp_hypercall>
-  444d14:	eb 45                	jmp    444d5b <main+0x119>
-  444d16:	8b 45 9c             	mov    -0x64(%rbp),%eax
-  444d19:	83 f8 02             	cmp    $0x2,%eax
-  444d1c:	75 33                	jne    444d51 <main+0x10f>
-  444d1e:	bf 4a 4f 44 00       	mov    $0x444f4a,%edi
-  444d23:	b8 00 00 00 00       	mov    $0x0,%eax
-  444d28:	e8 c3 b7 fb ff       	callq  4004f0 <printf@plt>
-  444d2d:	48 8d 45 a0          	lea    -0x60(%rbp),%rax
-  444d31:	48 89 c6             	mov    %rax,%rsi
-  444d34:	bf 61 4f 44 00       	mov    $0x444f61,%edi
-  444d39:	b8 00 00 00 00       	mov    $0x0,%eax
-  444d3e:	e8 cd b7 fb ff       	callq  400510 <scanf@plt>
-  444d43:	48 8b 45 a0          	mov    -0x60(%rbp),%rax
-  444d47:	48 89 c7             	mov    %rax,%rdi
-  444d4a:	e8 b6 fe ff ff       	callq  444c05 <remove_bp_hypercall>
-  444d4f:	eb 0a                	jmp    444d5b <main+0x119>
-  444d51:	bf 66 4f 44 00       	mov    $0x444f66,%edi
-  444d56:	e8 75 b7 fb ff       	callq  4004d0 <puts@plt>
-  444d5b:	90                   	nop
-  444d5c:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
-  444d60:	64 48 33 04 25 28 00 	xor    %fs:0x28,%rax
-  444d67:	00 00 
-  444d69:	74 05                	je     444d70 <main+0x12e>
-  444d6b:	e8 70 b7 fb ff       	callq  4004e0 <__stack_chk_fail@plt>
-  444d70:	c9                   	leaveq 
-  444d71:	c3                   	retq   
-  444d72:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
-  444d79:	00 00 00 
-  444d7c:	0f 1f 40 00          	nopl   0x0(%rax)
+0000000000444c32 <main>:
+  444c32:	55                   	push   %rbp
+  444c33:	48 89 e5             	mov    %rsp,%rbp
+  444c36:	48 83 ec 70          	sub    $0x70,%rsp
+  444c3a:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+  444c41:	00 00 
+  444c43:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+  444c47:	31 c0                	xor    %eax,%eax
+  444c49:	bf c8 4e 44 00       	mov    $0x444ec8,%edi
+  444c4e:	b8 00 00 00 00       	mov    $0x0,%eax
+  444c53:	e8 98 b8 fb ff       	callq  4004f0 <printf@plt>
+  444c58:	48 8d 45 9c          	lea    -0x64(%rbp),%rax
+  444c5c:	48 89 c6             	mov    %rax,%rsi
+  444c5f:	bf e8 4e 44 00       	mov    $0x444ee8,%edi
+  444c64:	b8 00 00 00 00       	mov    $0x0,%eax
+  444c69:	e8 a2 b8 fb ff       	callq  400510 <scanf@plt>
+  444c6e:	8b 45 9c             	mov    -0x64(%rbp),%eax
+  444c71:	83 f8 01             	cmp    $0x1,%eax
+  444c74:	0f 85 8c 00 00 00    	jne    444d06 <main+0xd4>
+  444c7a:	bf f0 4e 44 00       	mov    $0x444ef0,%edi
+  444c7f:	b8 00 00 00 00       	mov    $0x0,%eax
+  444c84:	e8 67 b8 fb ff       	callq  4004f0 <printf@plt>
+  444c89:	48 8d 4d b0          	lea    -0x50(%rbp),%rcx
+  444c8d:	48 8d 55 a8          	lea    -0x58(%rbp),%rdx
+  444c91:	48 8d 45 a0          	lea    -0x60(%rbp),%rax
+  444c95:	48 89 c6             	mov    %rax,%rsi
+  444c98:	bf 1a 4f 44 00       	mov    $0x444f1a,%edi
+  444c9d:	b8 00 00 00 00       	mov    $0x0,%eax
+  444ca2:	e8 69 b8 fb ff       	callq  400510 <scanf@plt>
+  444ca7:	bf 30 4f 44 00       	mov    $0x444f30,%edi
+  444cac:	b8 00 00 00 00       	mov    $0x0,%eax
+  444cb1:	e8 3a b8 fb ff       	callq  4004f0 <printf@plt>
+  444cb6:	48 8d 45 d0          	lea    -0x30(%rbp),%rax
+  444cba:	48 89 c6             	mov    %rax,%rsi
+  444cbd:	bf 4f 4f 44 00       	mov    $0x444f4f,%edi
+  444cc2:	b8 00 00 00 00       	mov    $0x0,%eax
+  444cc7:	e8 44 b8 fb ff       	callq  400510 <scanf@plt>
+  444ccc:	48 8d 55 c0          	lea    -0x40(%rbp),%rdx
+  444cd0:	48 8d 45 d0          	lea    -0x30(%rbp),%rax
+  444cd4:	48 89 d6             	mov    %rdx,%rsi
+  444cd7:	48 89 c7             	mov    %rax,%rdi
+  444cda:	e8 a6 fd ff ff       	callq  444a85 <str2inst>
+  444cdf:	48 98                	cltq   
+  444ce1:	48 89 45 b8          	mov    %rax,-0x48(%rbp)
+  444ce5:	48 8b 7d b0          	mov    -0x50(%rbp),%rdi
+  444ce9:	48 8b 4d a8          	mov    -0x58(%rbp),%rcx
+  444ced:	48 8b 45 a0          	mov    -0x60(%rbp),%rax
+  444cf1:	48 8b 55 b8          	mov    -0x48(%rbp),%rdx
+  444cf5:	48 8d 75 c0          	lea    -0x40(%rbp),%rsi
+  444cf9:	49 89 f8             	mov    %rdi,%r8
+  444cfc:	48 89 c7             	mov    %rax,%rdi
+  444cff:	e8 20 fe ff ff       	callq  444b24 <manage_bp_hypercall>
+  444d04:	eb 5a                	jmp    444d60 <main+0x12e>
+  444d06:	8b 45 9c             	mov    -0x64(%rbp),%eax
+  444d09:	83 f8 02             	cmp    $0x2,%eax
+  444d0c:	75 48                	jne    444d56 <main+0x124>
+  444d0e:	bf 52 4f 44 00       	mov    $0x444f52,%edi
+  444d13:	b8 00 00 00 00       	mov    $0x0,%eax
+  444d18:	e8 d3 b7 fb ff       	callq  4004f0 <printf@plt>
+  444d1d:	48 8d 45 a0          	lea    -0x60(%rbp),%rax
+  444d21:	48 89 c6             	mov    %rax,%rsi
+  444d24:	bf 69 4f 44 00       	mov    $0x444f69,%edi
+  444d29:	b8 00 00 00 00       	mov    $0x0,%eax
+  444d2e:	e8 dd b7 fb ff       	callq  400510 <scanf@plt>
+  444d33:	48 8b 45 a0          	mov    -0x60(%rbp),%rax
+  444d37:	41 b8 00 00 00 00    	mov    $0x0,%r8d
+  444d3d:	b9 00 00 00 00       	mov    $0x0,%ecx
+  444d42:	ba 00 00 00 00       	mov    $0x0,%edx
+  444d47:	be 00 00 00 00       	mov    $0x0,%esi
+  444d4c:	48 89 c7             	mov    %rax,%rdi
+  444d4f:	e8 d0 fd ff ff       	callq  444b24 <manage_bp_hypercall>
+  444d54:	eb 0a                	jmp    444d60 <main+0x12e>
+  444d56:	bf 6e 4f 44 00       	mov    $0x444f6e,%edi
+  444d5b:	e8 70 b7 fb ff       	callq  4004d0 <puts@plt>
+  444d60:	90                   	nop
+  444d61:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+  444d65:	64 48 33 04 25 28 00 	xor    %fs:0x28,%rax
+  444d6c:	00 00 
+  444d6e:	74 05                	je     444d75 <main+0x143>
+  444d70:	e8 6b b7 fb ff       	callq  4004e0 <__stack_chk_fail@plt>
+  444d75:	c9                   	leaveq 
+  444d76:	c3                   	retq   
+  444d77:	66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
+  444d7e:	00 00 
 
 0000000000444d80 <__libc_csu_init>:
   444d80:	41 57                	push   %r15

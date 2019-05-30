@@ -69925,24 +69925,22 @@ int str2inst(char *inst_str, uint8_t *inst){
 //inst_length: 断点所在的指令长度
 //sched: 为1: go_first; 为2: go_second
 //next_bp: 下一条指令地址 
-void insert_bp_hypercall(uint64_t hw_bp_addr, uint8_t *inst, uint64_t inst_length, uint64_t sched, uint64_t next_bp){
+void manage_bp_hypercall(uint64_t hw_bp_addr, uint8_t *inst, uint64_t inst_length, uint64_t sched, uint64_t next_bp){
     uint64_t a = 0x6464646464;  // insert hw_bp here when compling qemu
-    printf("called insert_bp_hypercall(uint64_t)\n");
-    printf("hw_bp_addr: 0x%llx\n", hw_bp_addr);
-    printf("sched: %d\n", sched);
-    printf("next_bp: 0x%llx\n", next_bp);
-    
-    printf("inst: ", inst_length);
-    for(int i = 0; i < inst_length; i++)
-        printf("%x ", (uint32_t)inst[i]);
-    printf("\ninst_length: %d\n", inst_length);
-    
-}
-
-void remove_bp_hypercall(uint64_t hw_bp_addr){
-    uint64_t a = 0x6464646464;  // insert hw_bp here when compling qemu
-    printf("called remove_bp_hypercall(uint64_t)\n");
-    printf("hw_bp_addr: 0x%llx\n", hw_bp_addr);
+    if(inst != NULL){
+        printf("called insert_bp_hypercall(uint64_t)\n");
+        printf("hw_bp_addr: 0x%llx\n", hw_bp_addr);
+        printf("sched: %d\n", sched);
+        printf("next_bp: 0x%llx\n", next_bp);
+        printf("inst: ", inst_length);
+        for(int i = 0; i < inst_length; i++)
+            printf("%x ", (uint32_t)inst[i]);
+        printf("\ninst_length: %d\n", inst_length);
+    }
+    else{
+        printf("called remove_bp_hypercall(uint64_t)\n");
+        printf("hw_bp_addr: 0x%llx\n", hw_bp_addr);
+    }
 }
 
 void main(){
@@ -69956,17 +69954,17 @@ void main(){
     printf("input=> (insert: 1 remove: 2)  ");
     scanf("%d", &command);
     if(command == 1){
-        printf("input=> (hw_bp_addr sched next_bp)  ");
+        printf("input=> (hw_bp_addr sched(1/2) next_bp)  ");
         scanf("%llx %llx %llx", &hw_bp_addr, &sched, &next_bp);
         printf("input=> (inst e.g. 0F1A00C0)  ");
         scanf("%s", inst_str);
         inst_length = str2inst(inst_str, inst);
-        insert_bp_hypercall(hw_bp_addr, inst, inst_length, sched, next_bp);
+        manage_bp_hypercall(hw_bp_addr, inst, inst_length, sched, next_bp);
     }
     else if(command == 2){
         printf("input=> (hw_bp_addr)  ");
         scanf("%llx", &hw_bp_addr);
-        remove_bp_hypercall(hw_bp_addr);
+        manage_bp_hypercall(hw_bp_addr, NULL, 0, 0, 0);
     }
     else{
         printf("input error:\n");
