@@ -69957,7 +69957,7 @@ void main(){
     scanf("%d", &command);
     if(command == 1){
         printf("input=> (hw_bp_addr sched next_bp)  ");
-        scanf("%llx %d %llx", &hw_bp_addr, &sched, &next_bp);
+        scanf("%llx %llx %llx", &hw_bp_addr, &sched, &next_bp);
         printf("input=> (inst e.g. 0F1A00C0)  ");
         scanf("%s", inst_str);
         inst_length = str2inst(inst_str, inst);
