@@ -6,6 +6,7 @@ addr: 400a61
 inst: c705211620
 next_addr: 400a6b
 input:
+1
 400a61 1 400a6b
 c705211620
 
@@ -14,6 +15,7 @@ addr: 400b1a
 inst: c705681520
 next_addr: 400b24
 input:
+1
 400b1a 2 400b24
 c705681520
 
