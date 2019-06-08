@@ -2,22 +2,22 @@
 For manage_hw_bp:
 
 go_first
-addr: 400a61
-inst: c705211620
-next_addr: 400a6b
+addr: 40234C
+inst: 488b4868
+next_addr: 402350
 input:
 1
-400a61 2 400a6b
-c705211620
+40234C 1 402350
+488b4868
 
 go_second
-addr: 400b1a
-inst: c705681520
-next_addr: 400b24
+addr: 40273c
+inst: e8bfe4ff
+next_addr: 402741
 input:
 1
-400b1a 1 400b24
-c705681520
+40273c 2 402741
+e8bfe4ff
 
 ========================
 For libhook.c
